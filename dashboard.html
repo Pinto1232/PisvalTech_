@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pisval Tech - Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="images/Pisval-Logo.jpg" alt="Pisval Tech Logo" class="logo">
+                <h2>Pisval Tech</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="index.html" class="nav-link">
+                            <i class="ri-home-line"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link active">
+                            <i class="ri-file-list-line"></i>
+                            <span>Proposals</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">
+                            <i class="ri-palette-line"></i>
+                            <span>Themes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">
+                            <i class="ri-settings-line"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <div class="search-bar">
+                    <i class="ri-search-line"></i>
+                    <input type="text" placeholder="Search proposals by name or client...">
+                </div>
+                <div class="top-nav-right">
+                    <button class="new-proposal-btn" id="createProposalBtn">
+                        <i class="ri-add-line"></i>
+                        <span>Create New Proposal</span>
+                    </button>
+                    <div class="language-selector">
+                        <select>
+                            <option value="en">English</option>
+                            <option value="pt">Portuguese</option>
+                        </select>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=2563eb&color=fff" alt="Profile">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content">
+                <div class="page-header">
+                    <div>
+                        <h1>Proposals</h1>
+                        <p>Manage and track your business proposals</p>
+                    </div>
+                </div>
+
+                <!-- Proposal Grid -->
+                <div class="proposal-grid">
+                    <!-- New Proposal Card -->
+                    <div class="proposal-card new-card" id="newProposalCard">
+                        <div class="card-content">
+                            <i class="ri-add-circle-line"></i>
+                            <h3>Create New Proposal</h3>
+                            <p>Start from scratch or use a template</p>
+                        </div>
+                    </div>
+
+                    <!-- Recent Proposals -->
+                    <div class="proposal-card">
+                        <div class="card-header">
+                            <img src="https://ui-avatars.com/api/?name=Gaboil+Energy&background=22c55e&color=fff"
+                                alt="Gaboil Energy">
+                            <div class="status-badge pending">Pending</div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Website Development Proposal</h3>
+                            <p>Gaboil Energy</p>
+                            <div class="card-meta">
+                                <span><i class="ri-calendar-line"></i> Apr 6, 2025</span>
+                                <span><i class="ri-money-dollar-circle-line"></i> $16,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="proposal-card">
+                        <div class="card-header">
+                            <img src="https://ui-avatars.com/api/?name=Tech+Corp&background=3b82f6&color=fff"
+                                alt="Tech Corp">
+                            <div class="status-badge approved">Approved</div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Mobile App Development</h3>
+                            <p>Tech Corp</p>
+                            <div class="card-meta">
+                                <span><i class="ri-calendar-line"></i> Mar 15, 2025</span>
+                                <span><i class="ri-money-dollar-circle-line"></i> $25,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="proposal-card">
+                        <div class="card-header">
+                            <img src="https://ui-avatars.com/api/?name=Global+Solutions&background=6366f1&color=fff"
+                                alt="Global Solutions">
+                            <div class="status-badge draft">Draft</div>
+                        </div>
+                        <div class="card-content">
+                            <h3>IT Consulting Services</h3>
+                            <p>Global Solutions</p>
+                            <div class="card-meta">
+                                <span><i class="ri-calendar-line"></i> Apr 1, 2025</span>
+                                <span><i class="ri-money-dollar-circle-line"></i> $12,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for New Proposal -->
+    <div class="modal" id="newProposalModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Proposal</h2>
+                <button class="close-modal"><i class="ri-close-line"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Client Company Name</label>
+                    <input type="text" placeholder="Enter company name">
+                </div>
+                <div class="form-group">
+                    <label>Logo Upload</label>
+                    <div class="file-upload">
+                        <i class="ri-upload-cloud-line"></i>
+                        <p>Drag & drop or click to upload</p>
+                        <input type="file" accept="image/*">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Project Description</label>
+                    <textarea placeholder="Enter project description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Services</label>
+                    <div class="service-tags">
+                        <span class="tag">Web Development <i class="ri-close-line"></i></span>
+                        <span class="tag">UI/UX Design <i class="ri-close-line"></i></span>
+                        <input type="text" placeholder="Add service...">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Project Value</label>
+                        <div class="currency-input">
+                            <select>
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                            </select>
+                            <input type="number" placeholder="Enter amount">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Timeline</label>
+                        <input type="date">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary">Cancel</button>
+                <button class="btn-primary">Create Proposal</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/dashboard.js"></script>
+    <script src="js/shared.js"></script>
+</body>
+
+</html>

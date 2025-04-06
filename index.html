@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pisval Tech Proposal for Gaboil Energy</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        .dashboard-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(to right, #2563eb, #3b82f6);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .dashboard-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-dropdown {
+            position: absolute;
+            z-index: 1000;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1a202c;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.875rem;
+        }
+
+        .input-hint {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(to right, #2563eb, #3b82f6);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="images/Pisval-Logo.jpg" alt="Pisval Tech Logo" class="logo">
+            </div>
+            <div class="nav-buttons">
+                <button type="button" id="dashboardBtn" class="dashboard-btn" role="button"
+                    onclick="handleDashboardClick(event)">
+                    <i class="ri-dashboard-line"></i>
+                    <span>Access Dashboard</span>
+                </button>
+            </div>
+            <h1>WEBSITE DEVELOPMENT PROPOSAL</h1>
+            <p class="subtitle">Professional Web Solution for Petroleum Services</p>
+        </header>
+
+        <div class="proposal-info">
+            <div>
+                <h3>Prepared By</h3>
+                <p>Pisval Tech</p>
+            </div>
+            <div>
+                <h3>Prepared For</h3>
+                <p>Gaboil Energy</p>
+            </div>
+            <div>
+                <h3>Date</h3>
+                <p>April 6, 2025</p>
+            </div>
+            <div>
+                <h3>Valid Until</h3>
+                <p>May 6, 2025</p>
+            </div>
+        </div>
+
+        <main>
+            <section>
+                <h2>EXECUTIVE SUMMARY</h2>
+                <div class="executive-summary">
+                    <p>Thank you for considering Pisval Tech for your website development needs. We understand that
+                        Gaboil Energy requires a professional web presence to effectively showcase your petroleum oil
+                        services in the competitive energy sector. Our team is prepared to deliver a high-quality,
+                        industry-specific website that will enhance your brand visibility and support your business
+                        objectives.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>PROJECT UNDERSTANDING</h2>
+                <p>Gaboil Energy operates in the petroleum industry, providing specialized oil services. Your website
+                    will serve as a critical marketing and information platform to reach potential clients, showcase
+                    your expertise, and establish credibility in the petroleum sector. Our solution will be tailored to
+                    address the unique requirements of your industry while ensuring an exceptional user experience.</p>
+            </section>
+
+            <section>
+                <h2>SCOPE OF WORK</h2>
+                <div class="services">
+                    <div class="service-item">
+                        <h3>Discovery & Planning</h3>
+                        <ul>
+                            <li>Initial consultation and requirements gathering</li>
+                            <li>Site architecture planning</li>
+                            <li>Content strategy development</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>Design</h3>
+                        <ul>
+                            <li>Custom responsive design optimized for all devices</li>
+                            <li>Industry-appropriate color scheme and visual elements</li>
+                            <li>User experience (UX) optimization</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>Development</h3>
+                        <ul>
+                            <li>Front-end development with modern frameworks</li>
+                            <li>Back-end development and CMS implementation</li>
+                            <li>Integration of contact forms and inquiry systems</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>Industry-Specific Features</h3>
+                        <ul>
+                            <li>Service portfolio showcase</li>
+                            <li>Project gallery with case studies</li>
+                            <li>Team/expertise profiles</li>
+                            <li>Client testimonials section</li>
+                            <li>Interactive service area map</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>SEO & Marketing Integration</h3>
+                        <ul>
+                            <li>On-page SEO optimization</li>
+                            <li>Google Analytics setup</li>
+                            <li>Search console integration</li>
+                            <li>Performance optimization</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>Quality Assurance</h3>
+                        <ul>
+                            <li>Cross-browser testing</li>
+                            <li>Mobile responsiveness verification</li>
+                            <li>Security implementation</li>
+                            <li>Performance optimization</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>Deployment & Training</h3>
+                        <ul>
+                            <li>Website launch</li>
+                            <li>CMS training (2 sessions)</li>
+                            <li>Documentation provided</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>INVESTMENT</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Description</th>
+                            <th>Investment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Discovery & Planning</td>
+                            <td>Requirements gathering, sitemap creation</td>
+                            <td>$1,500</td>
+                        </tr>
+                        <tr>
+                            <td>Design</td>
+                            <td>Custom responsive design for all devices</td>
+                            <td>$3,000</td>
+                        </tr>
+                        <tr>
+                            <td>Development</td>
+                            <td>Front-end and back-end implementation</td>
+                            <td>$6,500</td>
+                        </tr>
+                        <tr>
+                            <td>Industry Features</td>
+                            <td>Petroleum-specific functionality</td>
+                            <td>$2,500</td>
+                        </tr>
+                        <tr>
+                            <td>SEO & Marketing</td>
+                            <td>Basic SEO setup and optimization</td>
+                            <td>$1,200</td>
+                        </tr>
+                        <tr>
+                            <td>Quality Assurance</td>
+                            <td>Testing and refinement</td>
+                            <td>$800</td>
+                        </tr>
+                        <tr>
+                            <td>Training & Deployment</td>
+                            <td>Launch and knowledge transfer</td>
+                            <td>$500</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Investment</strong></td>
+                            <td></td>
+                            <td><strong>$16,000</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Payment Schedule</h3>
+                <ul>
+                    <li>30% upon project initiation: $4,800</li>
+                    <li>40% upon design approval: $6,400</li>
+                    <li>30% upon project completion: $4,800</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>TIMELINE</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-phase">Discovery</div>
+                        <div class="timeline-duration">1-2 weeks</div>
+                        <div class="timeline-details">Site architecture, content plan</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-phase">Design</div>
+                        <div class="timeline-duration">3-4 weeks</div>
+                        <div class="timeline-details">Mockups, UI/UX elements</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-phase">Development</div>
+                        <div class="timeline-duration">5-6 weeks</div>
+                        <div class="timeline-details">Functional website</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-phase">Testing</div>
+                        <div class="timeline-duration">1-2 weeks</div>
+                        <div class="timeline-details">Bug-free implementation</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-phase">Deployment</div>
+                        <div class="timeline-duration">1 week</div>
+                        <div class="timeline-details">Live website, training</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-phase">Total Duration</div>
+                        <div class="timeline-duration">11-15 weeks</div>
+                        <div class="timeline-details"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>MAINTENANCE & SUPPORT</h2>
+                <p>After your website launches, we offer ongoing support to ensure your digital presence remains secure,
+                    up-to-date, and effective.</p>
+
+                <div class="package-cards">
+                    <div class="package">
+                        <div class="package-header">
+                            <h3>Basic</h3>
+                            <div class="package-price">$250<span>/month</span></div>
+                            <div class="annual">$2,550/year (15% discount)</div>
+                        </div>
+                        <div class="package-features">
+                            <ul>
+                                <li>Security updates</li>
+                                <li>Regular backups</li>
+                                <li>Uptime monitoring</li>
+                                <li>Email support</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="package">
+                        <div class="package-header">
+                            <h3>Standard</h3>
+                            <div class="package-price">$450<span>/month</span></div>
+                            <div class="annual">$4,590/year (15% discount)</div>
+                        </div>
+                        <div class="package-features">
+                            <ul>
+                                <li>All Basic features</li>
+                                <li>Content updates (up to 5 pages/month)</li>
+                                <li>Performance optimization</li>
+                                <li>Priority support</li>
+                                <li>Monthly analytics report</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="package">
+                        <div class="package-header">
+                            <h3>Premium</h3>
+                            <div class="package-price">$750<span>/month</span></div>
+                            <div class="annual">$7,650/year (15% discount)</div>
+                        </div>
+                        <div class="package-features">
+                            <ul>
+                                <li>All Standard features</li>
+                                <li>Unlimited content updates</li>
+                                <li>Advanced SEO optimization</li>
+                                <li>24/7 emergency support</li>
+                                <li>Quarterly strategy sessions</li>
+                                <li>Social media integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <h3>Contact Us</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>Email: info@pisvaltech.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>Phone: +1 (555) 123-4567</span>
+                </div>
+                <div class="contact-item">
+                    <span>Address: 123 Tech Street, Silicon Valley, CA 94025</span>
+                </div>
+            </div>
+            <p class="footer-note">This proposal is valid for 30 days from the date of issue. All prices are in USD and
+                subject to change based on project requirements.</p>
+        </footer>
+    </div>
+    <script src="js/home.js"></script>
+    <script src="js/shared.js"></script>
+</body>
+
+</html>
