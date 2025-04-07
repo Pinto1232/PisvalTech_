@@ -170,22 +170,26 @@ class Dashboard {
         });
     }
 
-    handleCreateProposal() {
-    const formData = this.getFormData();
-    if (this.validateFormData(formData)) {
-        const proposal = window.proposalManager.addProposal(formData);
-        this.toggleModal();
-        this.clearForm();
-        console.log("Sending proposalCreated message:", proposal);
-
-        // Send message to index.html
-        if (window.opener && !window.opener.closed) {
-            window.opener.postMessage({ type: 'proposalCreated', proposal: proposal }, '*');
-        } else {
-            console.warn("window.opener is not available or closed.");
+ loadProposals() {
+    const savedProposals = localStorage.getItem("proposals");
+    if (savedProposals) {
+        try {
+            const proposals = JSON.parse(savedProposals);
+            console.log("Loaded proposals:", proposals); 
+            return proposals;
+        } catch (error) {
+            console.error("Error parsing saved proposals:", error);
+            // Instead of removing everything, log a warning and use default proposals
+            console.warn("Using default proposals due to parsing error.  Check localStorage for corrupted data.");
+            return this.getDefaultProposals(); // Use defaults if parsing fails
         }
+    } else {
+        const defaultProposals = this.getDefaultProposals();
+        this.saveProposals(); // Save the default proposals
+        return defaultProposals;
     }
 }
+
 
     getFormData() {
         const titleInput = document.querySelector('input[name="title"]');

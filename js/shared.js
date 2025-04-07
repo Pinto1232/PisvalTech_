@@ -15,21 +15,25 @@ class ProposalManager {
     }
 
     loadProposals() {
-        const savedProposals = localStorage.getItem("proposals");
-        if (savedProposals) {
-            try {
-                const proposals = JSON.parse(savedProposals);
-                console.log("Loaded proposals:", proposals); // Debugging
-                return proposals;
-            } catch (error) {
-                console.error("Error parsing saved proposals:", error);
-                localStorage.removeItem("proposals");
-            }
+    const savedProposals = localStorage.getItem("proposals");
+    if (savedProposals) {
+        try {
+            const proposals = JSON.parse(savedProposals);
+            console.log("Loaded proposals:", proposals); 
+            return proposals;
+        } catch (error) {
+            console.error("Error parsing saved proposals:", error);
+            // Instead of removing everything, log a warning and use default proposals
+            console.warn("Using default proposals due to parsing error.  Check localStorage for corrupted data.");
+            return this.getDefaultProposals(); // Use defaults if parsing fails
         }
+    } else {
         const defaultProposals = this.getDefaultProposals();
-        this.saveProposals();
+        this.saveProposals(); // Save the default proposals
         return defaultProposals;
     }
+}
+
 
     saveProposals() {
         console.log("Saving proposals:", this.proposals); // Debugging
