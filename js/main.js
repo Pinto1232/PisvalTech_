@@ -1,148 +1,5 @@
-// Add smooth scrolling to all links
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
-      behavior: "smooth",
-    });
-  });
-});
-
-// Add animation to timeline items when they come into view
-const timelineItems = document.querySelectorAll(".timeline-item");
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateX(0)";
-      }
-    });
-  },
-  {
-    threshold: 0.1,
-  }
-);
-
-timelineItems.forEach((item) => {
-  item.style.opacity = "0";
-  item.style.transform = "translateX(-20px)";
-  item.style.transition = "all 0.5s ease-out";
-  observer.observe(item);
-});
-
-// Add hover effect to service items
-const serviceItems = document.querySelectorAll(".service-item");
-
-serviceItems.forEach((item) => {
-  item.addEventListener("mouseenter", () => {
-    item.style.transform = "translateY(-5px)";
-    item.style.boxShadow = "0 8px 15px rgba(0, 0, 0, 0.1)";
-  });
-
-  item.addEventListener("mouseleave", () => {
-    item.style.transform = "translateY(0)";
-    item.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.05)";
-  });
-});
-
-// DOM Elements
-const newProposalBtn = document.querySelector(".new-proposal-btn");
-const modal = document.querySelector(".modal");
-const closeModalBtn = document.querySelector(".close-modal");
-const fileUpload = document.querySelector(".file-upload");
-const fileInput = document.querySelector('.file-upload input[type="file"]');
-const serviceTagsContainer = document.querySelector(".service-tags");
-const serviceInput = document.querySelector(".service-tags input");
-const viewOptions = document.querySelectorAll(".view-options button");
-const proposalGrid = document.querySelector(".proposal-grid");
-
-// Modal Functionality
-function toggleModal() {
-  modal.classList.toggle("active");
-  document.body.style.overflow = modal.classList.contains("active")
-    ? "hidden"
-    : "";
-}
-
-newProposalBtn.addEventListener("click", toggleModal);
-closeModalBtn.addEventListener("click", toggleModal);
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) toggleModal();
-});
-
-// File Upload
-fileUpload.addEventListener("click", () => fileInput.click());
-fileUpload.addEventListener("dragover", (e) => {
-  e.preventDefault();
-  fileUpload.classList.add("drag-over");
-});
-fileUpload.addEventListener("dragleave", () => {
-  fileUpload.classList.remove("drag-over");
-});
-fileUpload.addEventListener("drop", (e) => {
-  e.preventDefault();
-  fileUpload.classList.remove("drag-over");
-  const files = e.dataTransfer.files;
-  if (files.length) {
-    handleFileUpload(files[0]);
-  }
-});
-fileInput.addEventListener("change", (e) => {
-  if (e.target.files.length) {
-    handleFileUpload(e.target.files[0]);
-  }
-});
-
-function handleFileUpload(file) {
-  if (!file.type.startsWith("image/")) {
-    alert("Please upload an image file");
-    return;
-  }
-  // Handle the file upload
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    // Preview the image or handle the upload
-    console.log("File loaded:", e.target.result);
-  };
-  reader.readAsDataURL(file);
-}
-
-// Service Tags
-serviceInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && e.target.value.trim()) {
-    addServiceTag(e.target.value.trim());
-    e.target.value = "";
-    e.preventDefault();
-  }
-});
-
-function addServiceTag(service) {
-  const tag = document.createElement("span");
-  tag.className = "tag";
-  tag.innerHTML = `${service} <i class="ri-close-line"></i>`;
-  tag.querySelector("i").addEventListener("click", () => tag.remove());
-  serviceTagsContainer.insertBefore(tag, serviceInput);
-}
-
-// View Options
-viewOptions.forEach((button) => {
-  button.addEventListener("click", () => {
-    viewOptions.forEach((btn) => btn.classList.remove("active"));
-    button.classList.add("active");
-
-    // Toggle between grid and list view
-    if (button.querySelector(".ri-list-check-2")) {
-      proposalGrid.classList.add("list-view");
-    } else {
-      proposalGrid.classList.remove("list-view");
-    }
-  });
-});
-
-// Theme Customization
-const themes = {
+// Theme configuration
+const THEMES = {
   modern: {
     primary: "#2563eb",
     secondary: "#3b82f6",
@@ -160,31 +17,219 @@ const themes = {
   },
 };
 
-function applyTheme(themeName) {
-  const theme = themes[themeName];
-  if (!theme) return;
+class AppUI {
+  constructor() {
+    this.initializeComponents();
+  }
 
-  const root = document.documentElement;
-  root.style.setProperty("--primary", theme.primary);
-  root.style.setProperty("--secondary", theme.secondary);
-  root.style.setProperty("--accent", theme.accent);
+  initializeComponents() {
+    this.setupSmoothScrolling();
+    this.setupTimelineAnimations();
+    this.setupServiceItems();
+    this.setupModal();
+    this.setupFileUpload();
+    this.setupServiceTags();
+    this.setupViewOptions();
+  }
+
+  // Smooth scrolling for anchor links
+  setupSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+  }
+
+  // Timeline animations
+  setupTimelineAnimations() {
+    const timelineItems = document.querySelectorAll(".timeline-item");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateX(0)";
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    timelineItems.forEach((item) => {
+      item.style.opacity = "0";
+      item.style.transform = "translateX(-20px)";
+      item.style.transition = "all 0.5s ease-out";
+      observer.observe(item);
+    });
+  }
+
+  // Service items hover effects
+  setupServiceItems() {
+    document.querySelectorAll(".service-item").forEach((item) => {
+      item.addEventListener("mouseenter", () => {
+        item.style.transform = "translateY(-5px)";
+        item.style.boxShadow = "0 8px 15px rgba(0, 0, 0, 0.1)";
+      });
+
+      item.addEventListener("mouseleave", () => {
+        item.style.transform = "translateY(0)";
+        item.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.05)";
+      });
+    });
+  }
+
+  // Modal functionality
+  setupModal() {
+    const modal = document.querySelector(".modal");
+    const newProposalBtn = document.querySelector(".new-proposal-btn");
+    const closeModalBtn = document.querySelector(".close-modal");
+
+    if (!modal || !newProposalBtn || !closeModalBtn) return;
+
+    const toggleModal = () => {
+      modal.classList.toggle("active");
+      document.body.style.overflow = modal.classList.contains("active")
+        ? "hidden"
+        : "";
+    };
+
+    newProposalBtn.addEventListener("click", toggleModal);
+    closeModalBtn.addEventListener("click", toggleModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) toggleModal();
+    });
+  }
+
+  // File upload functionality
+  setupFileUpload() {
+    const fileUpload = document.querySelector(".file-upload");
+    const fileInput = document.querySelector('.file-upload input[type="file"]');
+
+    if (!fileUpload || !fileInput) return;
+
+    fileUpload.addEventListener("click", () => fileInput.click());
+
+    this.setupDragAndDrop(fileUpload, fileInput);
+  }
+
+  setupDragAndDrop(fileUpload, fileInput) {
+    const dragEvents = ["dragover", "dragleave", "drop"];
+
+    dragEvents.forEach((eventName) => {
+      fileUpload.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        if (eventName === "dragover") {
+          fileUpload.classList.add("drag-over");
+        } else {
+          fileUpload.classList.remove("drag-over");
+        }
+      });
+    });
+
+    fileUpload.addEventListener("drop", (e) => {
+      const files = e.dataTransfer.files;
+      if (files.length) this.handleFileUpload(files[0]);
+    });
+
+    fileInput.addEventListener("change", (e) => {
+      if (e.target.files.length) this.handleFileUpload(e.target.files[0]);
+    });
+  }
+
+  handleFileUpload(file) {
+    if (!file.type.startsWith("image/")) {
+      alert("Please upload an image file");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      // Handle the uploaded file
+      console.log("File loaded:", e.target.result);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // Service tags functionality
+  setupServiceTags() {
+    const serviceInput = document.querySelector(".service-tags input");
+    if (!serviceInput) return;
+
+    serviceInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && e.target.value.trim()) {
+        this.addServiceTag(e.target.value.trim());
+        e.target.value = "";
+        e.preventDefault();
+      }
+    });
+  }
+
+  addServiceTag(service) {
+    const container = document.querySelector(".service-tags");
+    if (!container) return;
+
+    const tag = document.createElement("span");
+    tag.className = "tag";
+    tag.innerHTML = `${service} <i class="ri-close-line"></i>`;
+    tag.querySelector("i").addEventListener("click", () => tag.remove());
+    container.insertBefore(tag, container.querySelector("input"));
+  }
+
+  // View options functionality
+  setupViewOptions() {
+    const viewOptions = document.querySelectorAll(".view-options button");
+    const proposalGrid = document.querySelector(".proposal-grid");
+
+    if (!proposalGrid) return;
+
+    viewOptions.forEach((button) => {
+      button.addEventListener("click", () => {
+        viewOptions.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+        proposalGrid.classList.toggle(
+          "list-view",
+          button.querySelector(".ri-list-check-2")
+        );
+      });
+    });
+  }
+
+  // Theme application
+  applyTheme(themeName) {
+    const theme = THEMES[themeName];
+    if (!theme) return;
+
+    const root = document.documentElement;
+    Object.entries(theme).forEach(([property, value]) => {
+      root.style.setProperty(`--${property}`, value);
+    });
+  }
+
+  // PDF export functionality
+  async exportToPDF() {
+    const { jsPDF } = window.jspdf;
+    if (!jsPDF) {
+      console.warn("jsPDF not loaded");
+      return;
+    }
+
+    const doc = new jsPDF();
+    doc.setFontSize(20);
+    doc.text("Proposal", 20, 20);
+    doc.save("proposal.pdf");
+  }
 }
 
-// Export to PDF
-async function exportToPDF() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-
-  // Add content to PDF
-  doc.setFontSize(20);
-  doc.text("Proposal", 20, 20);
-
-  // Save the PDF
-  doc.save("proposal.pdf");
+// Initialize the application
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => {
+    window.app = new AppUI();
+  });
+} else {
+  window.app = new AppUI();
 }
-
-// Initialize
-document.addEventListener("DOMContentLoaded", () => {
-  // Initialize any necessary features
-  console.log("App initialized");
-});

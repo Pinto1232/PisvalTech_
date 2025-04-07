@@ -58,18 +58,19 @@
                     <input type="text" placeholder="Search proposals by name or client...">
                 </div>
                 <div class="top-nav-right">
-                    <button class="new-proposal-btn" id="createProposalBtn">
+                    <button class="new-proposal-btn" id="openNewProposalModalBtn">
                         <i class="ri-add-line"></i>
                         <span>Create New Proposal</span>
                     </button>
                     <div class="language-selector">
-                        <select>
+                        <select class="language-dropdown">
                             <option value="en">English</option>
                             <option value="pt">Portuguese</option>
                         </select>
                     </div>
                     <div class="user-profile">
-                        <img src="https://ui-avatars.com/api/?name=Admin&background=2563eb&color=fff" alt="Profile">
+                        <img class="user-profile"
+                            src="https://ui-avatars.com/api/?name=Admin&background=2563eb&color=fff" alt="Profile">
                     </div>
                 </div>
             </header>
@@ -79,7 +80,9 @@
                 <div class="page-header">
                     <div>
                         <h1>Proposals</h1>
+                        <p>Manage your proposals efficiently</p>
                         <p>Manage and track your business proposals</p>
+                        <button id="resetAllBtn" class="btn-secondary">Reset All</button> <!-- New button -->
                     </div>
                 </div>
 
@@ -95,11 +98,13 @@
                     </div>
 
                     <!-- Recent Proposals -->
-                    <div class="proposal-card">
+                    <div class="proposal-card" data-id="1">
                         <div class="card-header">
                             <img src="https://ui-avatars.com/api/?name=Gaboil+Energy&background=22c55e&color=fff"
                                 alt="Gaboil Energy">
                             <div class="status-badge pending">Pending</div>
+                            <button class="delete-proposal-btn"><i class="ri-delete-bin-line"></i></button>
+                            <!-- New delete button -->
                         </div>
                         <div class="card-content">
                             <h3>Website Development Proposal</h3>
@@ -147,7 +152,7 @@
         </main>
     </div>
 
-    <!-- Modal for New Proposal -->
+
     <div class="modal" id="newProposalModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -157,7 +162,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Client Company Name</label>
-                    <input type="text" placeholder="Enter company name">
+                    <input type="text" placeholder="Enter company name" name="client">
                 </div>
                 <div class="form-group">
                     <label>Logo Upload</label>
@@ -174,8 +179,6 @@
                 <div class="form-group">
                     <label>Services</label>
                     <div class="service-tags">
-                        <span class="tag">Web Development <i class="ri-close-line"></i></span>
-                        <span class="tag">UI/UX Design <i class="ri-close-line"></i></span>
                         <input type="text" placeholder="Add service...">
                     </div>
                 </div>
@@ -188,23 +191,95 @@
                                 <option value="EUR">EUR</option>
                                 <option value="GBP">GBP</option>
                             </select>
-                            <input type="number" placeholder="Enter amount">
+                            <input type="number" placeholder="Enter amount" name="amount">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Timeline</label>
-                        <input type="date">
+                        <input type="date" name="date">
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="title" placeholder="Enter Title">
+                    </div>
+                </div>
+                <!-- Investment Section -->
+                <div class="form-group">
+                    <label>Investment Details</label>
+                    <div id="investment-items">
+                        <!-- Investment items will be added here -->
+                    </div>
+                    <button type="button" id="add-investment-item" class="btn-secondary">Add Investment Item</button>
+                </div>
+
+                <!-- Timeline Section -->
+                <div class="form-group">
+                    <label>Timeline Details</label>
+                    <div id="timeline-items">
+                        <!-- Timeline items will be added here -->
+                    </div>
+                    <button type="button" id="add-timeline-item" class="btn-secondary">Add Timeline Item</button>
+                </div>
+                <!-- Maintenance Section -->
+                <div class="form-group">
+                    <label>Maintenance & Support</label>
+                    <div class="maintenance-options">
+                        <div class="maintenance-card">
+                            <label for="basic">
+                                <input type="radio" id="basic" name="maintenance" value="basic">
+                                <h4>Basic</h4>
+                                <p class="price">$250/month</p>
+                                <ul>
+                                    <li>Security updates</li>
+                                    <li>Regular backups</li>
+                                    <li>Uptime monitoring</li>
+                                    <li>Email support</li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="maintenance-card">
+                            <label for="standard">
+                                <input type="radio" id="standard" name="maintenance" value="standard">
+                                <h4>Standard</h4>
+                                <p class="price">$450/month</p>
+                                <ul>
+                                    <li>All Basic features</li>
+                                    <li>Content updates (up to 5 pages/month)</li>
+                                    <li>Performance optimization</li>
+                                    <li>Priority support</li>
+                                    <li>Monthly analytics report</li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="maintenance-card">
+                            <label for="premium">
+                                <input type="radio" id="premium" name="maintenance" value="premium">
+                                <h4>Premium</h4>
+                                <p class="price">$750/month</p>
+                                <ul>
+                                    <li>All Standard features</li>
+                                    <li>Unlimited content updates</li>
+                                    <li>Advanced SEO optimization</li>
+                                    <li>24/7 emergency support</li>
+                                    <li>Quarterly strategy sessions</li>
+                                    <li>Social media integration</li>
+                                </ul>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="modal-footer">
                 <button class="btn-secondary">Cancel</button>
                 <button class="btn-primary">Create Proposal</button>
             </div>
         </div>
     </div>
-    <script src="js/dashboard.js"></script>
+
+
     <script src="js/shared.js"></script>
+    <script src="js/dashboard.js"></script>
 </body>
 
 </html>
