@@ -170,26 +170,42 @@ class Dashboard {
         });
     }
 
- loadProposals() {
-    const savedProposals = localStorage.getItem("proposals");
-    if (savedProposals) {
-        try {
-            const proposals = JSON.parse(savedProposals);
-            console.log("Loaded proposals:", proposals); 
-            return proposals;
-        } catch (error) {
-            console.error("Error parsing saved proposals:", error);
-            // Instead of removing everything, log a warning and use default proposals
-            console.warn("Using default proposals due to parsing error.  Check localStorage for corrupted data.");
-            return this.getDefaultProposals(); // Use defaults if parsing fails
+    loadProposals() {
+        const savedProposals = localStorage.getItem("proposals");
+        if (savedProposals) {
+            try {
+                const proposals = JSON.parse(savedProposals);
+                console.log("Loaded proposals:", proposals);
+                return proposals;
+            } catch (error) {
+                console.error("Error parsing saved proposals:", error);
+                // Instead of removing everything, log a warning and use default proposals
+                console.warn("Using default proposals due to parsing error.  Check localStorage for corrupted data.");
+                return this.getDefaultProposals(); // Use defaults if parsing fails
+            }
+        } else {
+            console.log("No saved proposals found. Using default proposals.");
+            const defaultProposals = this.getDefaultProposals();
+            this.saveProposals(); // Save the default proposals
+            return defaultProposals;
         }
-    } else {
-        const defaultProposals = this.getDefaultProposals();
-        this.saveProposals(); // Save the default proposals
-        return defaultProposals;
     }
-}
 
+    handleCreateProposal() {
+        const formData = this.getFormData();
+        if (this.validateFormData(formData)) {
+            const proposal = window.proposalManager.addProposal(formData);
+            this.clearForm();
+            this.toggleModal();
+            console.log("Proposal created:", proposal);
+            window.dispatchEvent(new MessageEvent('message', {
+                data: {
+                    type: 'proposalCreated',
+                    proposal: proposal
+                }
+            }));
+        }
+    }
 
     getFormData() {
         const titleInput = document.querySelector('input[name="title"]');

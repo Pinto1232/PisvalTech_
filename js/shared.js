@@ -15,25 +15,25 @@ class ProposalManager {
     }
 
     loadProposals() {
-    const savedProposals = localStorage.getItem("proposals");
-    if (savedProposals) {
-        try {
-            const proposals = JSON.parse(savedProposals);
-            console.log("Loaded proposals:", proposals); 
-            return proposals;
-        } catch (error) {
-            console.error("Error parsing saved proposals:", error);
-            // Instead of removing everything, log a warning and use default proposals
-            console.warn("Using default proposals due to parsing error.  Check localStorage for corrupted data.");
-            return this.getDefaultProposals(); // Use defaults if parsing fails
+        const savedProposals = localStorage.getItem("proposals");
+        if (savedProposals) {
+            try {
+                const proposals = JSON.parse(savedProposals);
+                console.log("Loaded proposals:", proposals);
+                return proposals;
+            } catch (error) {
+                console.error("Error parsing saved proposals:", error);
+                // Instead of removing everything, log a warning and use default proposals
+                console.warn("Using default proposals due to parsing error.  Check localStorage for corrupted data.");
+                return this.getDefaultProposals(); // Use defaults if parsing fails
+            }
+        } else {
+            console.log("No saved proposals found. Using default proposals.");
+            const defaultProposals = this.getDefaultProposals();
+            this.saveProposals(); // Save the default proposals
+            return defaultProposals;
         }
-    } else {
-        const defaultProposals = this.getDefaultProposals();
-        this.saveProposals(); // Save the default proposals
-        return defaultProposals;
     }
-}
-
 
     saveProposals() {
         console.log("Saving proposals:", this.proposals); // Debugging
@@ -68,6 +68,8 @@ class ProposalManager {
                     { phase: "Testing", duration: "1-2 weeks", details: "Bug-free implementation" },
                     { phase: "Deployment", duration: "1 week", details: "Live website, training" }
                 ],
+                maintenance: "basic",
+                services: ["Web Design", "Web Development", "SEO"]
             },
             {
                 id: 2,
@@ -78,8 +80,22 @@ class ProposalManager {
                 amount: 25000,
                 clientLogo:
                     "https://ui-avatars.com/api/?name=Tech+Corp&background=3b82f6&color=fff",
-                investment: [],
-                timeline: [],
+                investment: [
+                    { component: "Planning", description: "Market research, feature definition", investment: 2000 },
+                    { component: "Design", description: "UI/UX design, wireframing", investment: 4000 },
+                    { component: "Development", description: "iOS and Android app development", investment: 15000 },
+                    { component: "Testing", description: "QA testing, bug fixing", investment: 2500 },
+                    { component: "Deployment", description: "App store submission", investment: 1500 }
+                ],
+                timeline: [
+                    { phase: "Planning", duration: "2-3 weeks", details: "Market analysis, feature list" },
+                    { phase: "Design", duration: "4-5 weeks", details: "Wireframes, mockups, UI/UX" },
+                    { phase: "Development", duration: "8-10 weeks", details: "Coding, integration" },
+                    { phase: "Testing", duration: "2-3 weeks", details: "QA, bug fixing" },
+                    { phase: "Deployment", duration: "1-2 weeks", details: "App store submission" }
+                ],
+                maintenance: "standard",
+                services: ["Mobile App Development", "UI/UX Design", "Testing"]
             },
             {
                 id: 3,
@@ -90,8 +106,20 @@ class ProposalManager {
                 amount: 12000,
                 clientLogo:
                     "https://ui-avatars.com/api/?name=Global+Solutions&background=6366f1&color=fff",
-                investment: [],
-                timeline: [],
+                investment: [
+                    { component: "Assessment", description: "Current IT infrastructure review", investment: 1000 },
+                    { component: "Strategy", description: "IT strategy development", investment: 3000 },
+                    { component: "Implementation", description: "IT solutions implementation", investment: 6000 },
+                    { component: "Support", description: "Ongoing IT support", investment: 2000 }
+                ],
+                timeline: [
+                    { phase: "Assessment", duration: "1-2 weeks", details: "Review of current systems" },
+                    { phase: "Strategy", duration: "2-3 weeks", details: "IT roadmap development" },
+                    { phase: "Implementation", duration: "4-6 weeks", details: "Deployment of new solutions" },
+                    { phase: "Support", duration: "Ongoing", details: "Continuous maintenance and support" }
+                ],
+                maintenance: "premium",
+                services: ["IT Consulting", "Cybersecurity", "Cloud Services"]
             },
         ];
     }
